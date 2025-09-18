@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 350px;
+      height: 250px;
+      margin: auto;
+    }
+    canvas {
+      max-width: 100% !important;
+      max-height: 100% !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<%- include('navbar')%>
+
+<!-- Dashboard Content -->
+<div class="container mt-4">
+  <div class="row">
+    <!-- Stats Cards -->
+    <div class="col-md-4 mb-4">
+      <div class="card text-white bg-primary">
+        <div class="card-body">
+          <h5 class="card-title">Users</h5>
+          <h3>1,250</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card text-white bg-success">
+        <div class="card-body">
+          <h5 class="card-title">Revenue</h5>
+          <h3>$8,450</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card text-white bg-danger">
+        <div class="card-body">
+          <h5 class="card-title">Issues</h5>
+          <h3>35</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="row">
+    <div class="col-md-6 mb-4 d-flex justify-content-center">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title text-center">Users Growth</h5>
+          <div class="chart-container">
+            <canvas id="usersChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4 d-flex justify-content-center">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title text-center">Revenue Breakdown</h5>
+          <div class="chart-container">
+            <canvas id="revenueChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Chart.js Script -->
+<script>
+  // Line Chart (Users Growth)
+  var ctx1 = document.getElementById('usersChart').getContext('2d');
+  new Chart(ctx1, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        label: 'Users',
+        data: [200, 400, 600, 800, 1000, 1250],
+        backgroundColor: 'rgba(0,123,255,0.2)',
+        borderColor: 'rgba(0,123,255,1)',
+        borderWidth: 2,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+
+  // Pie Chart (Revenue Breakdown)
+  var ctx2 = document.getElementById('revenueChart').getContext('2d');
+  new Chart(ctx2, {
+    type: 'pie',
+    data: {
+      labels: ['Subscriptions', 'Ads', 'Services'],
+      datasets: [{
+        data: [5000, 2000, 1450],
+        backgroundColor: ['#28a745', '#ffc107', '#17a2b8']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+</script>
+
+</body>
+</html>

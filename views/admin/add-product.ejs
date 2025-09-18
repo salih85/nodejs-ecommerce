@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Add Product</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <%- include('navbar') %>
+
+  <div class="container mt-5">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h4>Add New Product</h4>
+      </div>
+      <div class="card-body">
+        <form action="/admin/products/add" method="post">
+          <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" class="form-control" name="name" required>
+          </div>
+          <div class="form-group">
+            <label>Price</label>
+            <input type="number" class="form-control" name="price" required>
+          </div>
+          <div class="form-group">
+            <label>Stock</label>
+            <input type="number" class="form-control" name="stock" required>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select name="categories" class="form-control" required>
+              <option value="" selected>Select category</option>
+              <% Categories.forEach(c => { %>
+                <option value="<%= c.name %>"><%= c.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" class="form-control" name="image">
+          </div>
+          <div class="text-right">
+            <a href="/admin/products" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-success">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
