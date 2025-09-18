@@ -15,37 +15,20 @@
         <h4>Add New Product</h4>
       </div>
       <div class="card-body">
-        <form action="/admin/products/add" method="post">
-          <div class="form-group">
-            <label>Product Name</label>
-            <input type="text" class="form-control" name="name" required>
-          </div>
-          <div class="form-group">
-            <label>Price</label>
-            <input type="number" class="form-control" name="price" required>
-          </div>
-          <div class="form-group">
-            <label>Stock</label>
-            <input type="number" class="form-control" name="stock" required>
-          </div>
-          <div class="form-group">
-            <label>Category</label>
-            <select name="categories" class="form-control" required>
-              <option value="" selected>Select category</option>
-              <% Categories.forEach(c => { %>
-                <option value="<%= c.name %>"><%= c.name %></option>
-              <% }) %>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Image URL</label>
-            <input type="text" class="form-control" name="image">
-          </div>
-          <div class="text-right">
-            <a href="/admin/products" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn btn-success">Save</button>
-          </div>
-        </form>
+        <form action="/admin/products/add" method="POST">
+  <input type="text" name="name" placeholder="Product name" required>
+  <select name="category" required>
+    <!-- use your categories from DB as options -->
+    <option value="">Select category</option>
+    <% Categories.forEach(c => { %>
+      <option value="<%= c.name.toLowerCase() %>"><%= c.name %></option>
+    <% }) %>
+  </select>
+  <input type="number" name="price" placeholder="Price" required>
+  <input type="number" name="stock" placeholder="Stock" value="0">
+  <input type="text" name="image" placeholder="Image URL">
+  <button type="submit">Add Product</button>
+</form>
       </div>
     </div>
   </div>

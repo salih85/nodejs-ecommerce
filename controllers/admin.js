@@ -91,23 +91,30 @@ exports.addProductpage = async (req, res) => {
 
 exports.addProduct = async (req, res) => {
   try {
-    const { name, categories, price, stock, image } = req.body;
-    const id = `PRO${Date.now()}`;
+    const { name, category, price, stock, image } = req.body;
 
+    if (!category) {
+      return res.status(400).send("Category is required");
+    }
+
+    const id = `PRO${Date.now()}`;
     await Product.create({
       id,
       name,
-      categories,   
+      category: category.toLowerCase(),
       price,
       stock,
       image
     });
+
     return res.redirect('/admin/products');
+
   } catch (err) {
-    console.error(err);
-    return res.status(500).send("Error adding product");
+    console.error("Error adding product:", err);
+    return res.status(500).send("Error adding product: " + err.message);
   }
 };
+
 
 exports.deleteProduct = async (req, res) => {
   try {
